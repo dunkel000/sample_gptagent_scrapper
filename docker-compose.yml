@@ -1,0 +1,23 @@
+version: "3.8"
+
+services:
+  # Contenedor del navegador.  Expone puertos para WebDriver (4444) y noVNC (7900).
+  browser:
+    image: selenium/standalone-chrome:latest
+    shm_size: 2g
+    ports:
+      - "4444:4444"
+      - "7900:7900"
+    environment:
+      # Contraseña del servidor VNC/noVNC (ajústala si lo deseas)
+      - SE_VNC_PASSWORD=secret
+
+  # Contenedor que ejecuta el script de scraping
+  scraper:
+    build: .
+    depends_on:
+      - browser
+    environment:
+      # Dirección del WebDriver remoto.  Docker Compose resuelve el nombre del
+      # servicio `browser` automáticamente.
+      - BROWSER_URL=http://browser:4444/wd/hub
