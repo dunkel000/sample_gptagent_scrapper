@@ -33,6 +33,6 @@ script Python que se conecta al navegador y extrae datos.
 - El puerto 4444 expuesto por el contenedor `browser` es el WebDriver remoto
   donde se conecta Selenium.  El puerto 7900 expone la interfaz web noVNC que
   te permite ver e interactuar con el navegador.
-- Este ejemplo utiliza `selenium/standalone-chrome:latest`, pero puedes
+- Este ejemplo utiliza `seleniarm/standalone-chromium:latest`, pero puedes
   reemplazarlo por `selenium/standalone-firefox` o `selenium/standalone-edge`
   según tus necesidades.
