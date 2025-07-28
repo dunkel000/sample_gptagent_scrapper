@@ -5,27 +5,27 @@ from bs4 import BeautifulSoup
 
 def get_driver() -> webdriver.Remote:
     """
-    Crea y devuelve una instancia de WebDriver que se conecta al navegador
-    remoto especificado por la variable de entorno `BROWSER_URL`.  Utiliza
-    opciones recomendadas para entornos Docker.
+    Return a WebDriver instance that connects to the remote browser specified
+    by the `BROWSER_URL` environment variable. Recommended options for Docker
+    are used.
     """
     browser_url = os.environ.get("BROWSER_URL", "http://localhost:4444/wd/hub")
     options = webdriver.ChromeOptions()
-    # Reduce el uso de memoria compartida dentro de contenedores
+    # Reduce shared memory usage inside containers
     options.add_argument("--disable-dev-shm-usage")
-    # No se añade --headless para poder observar la navegación via noVNC
+    # Do not add --headless so we can watch the browser via noVNC
     return webdriver.Remote(command_executor=browser_url, options=options)
 
 
 def main():
-    # Página de ejemplo.  Cámbiala por la URL que quieres scrapear.
+    # Example page. Change it to the URL you want to scrape.
     url = "https://example.com"
     driver = get_driver()
     try:
         driver.get(url)
-        # Extrae el HTML generado tras la carga completa de la página
+        # Extract the HTML after the page has fully loaded
         soup = BeautifulSoup(driver.page_source, "html.parser")
-        print("Título de la página:", soup.title.get_text() if soup.title else "(sin título)")
+        print("Page title:", soup.title.get_text() if soup.title else "(untitled)")
     finally:
         driver.quit()
 
