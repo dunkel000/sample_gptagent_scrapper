@@ -1,12 +1,12 @@
 FROM python:3.11-slim
 
-# Instala Selenium y BeautifulSoup.  No instalamos Chrome porque el navegador
-# se ejecuta en un contenedor separado gestionado por Docker Compose.
+# Install Selenium and BeautifulSoup. Chrome is not installed because the
+# browser runs in a separate container managed by Docker Compose.
 RUN pip install --no-cache-dir selenium==4.18.1 beautifulsoup4
 
-# Copia el script de scraping al directorio de trabajo
+# Copy the scraping script into the working directory
 WORKDIR /app
 COPY scraper.py /app/
 
-# Comando por defecto: ejecuta el script
+# Default command: run the script
 CMD ["python", "scraper.py"]

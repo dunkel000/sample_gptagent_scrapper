@@ -1,38 +1,38 @@
 # sample_gptagent_scrapper
 
-Este repositorio contiene un ejemplo de «scraper» que se ejecuta en contenedores
-Docker utilizando Selenium y Docker Compose.  El servicio `browser` levanta una
-instancia de Chrome con su WebDriver remoto y un servidor noVNC para poder
-monitorear la navegación, mientras que el servicio `scraper` ejecuta un
-script Python que se conecta al navegador y extrae datos.
+This repository contains a sample scraper that runs in Docker containers using
+Selenium and Docker Compose. The `browser` service starts a Chrome instance with
+its remote WebDriver and a noVNC server so you can monitor the browsing
+session, while the `scraper` service runs a Python script that connects to the
+browser and extracts data.
 
-## Estructura
+## Structure
 
-- `Dockerfile` – Imagen que contiene Python, Selenium y el script de scraping.
-- `docker-compose.yml` – Define los servicios `browser` y `scraper`.
-- `scraper.py` – Código Python que se conecta al navegador remoto y realiza el
-  scraping.
+- `Dockerfile` – Image that contains Python, Selenium and the scraping script.
+- `docker-compose.yml` – Defines the `browser` and `scraper` services.
+- `scraper.py` – Python code that connects to the remote browser and performs
+  the scraping.
 
-## Uso
+## Usage
 
-1. Construye las imágenes y arranca los servicios en modo interactivo:
+1. Build the images and start the services interactively:
 
    ```bash
    docker‑compose up --build
    ```
 
-2. Abre tu navegador en `http://localhost:7900` e introduce la contraseña
-   `secret` para acceder a la interfaz noVNC y ver lo que sucede en Chrome.
+2. Open your browser at `http://localhost:7900` and enter the password
+   `secret` to access the noVNC interface and see what happens in Chrome.
 
-3. El script `scraper.py` se ejecutará automáticamente al arrancar el
-   contenedor `scraper` y mostrará el título de la página objetivo.  Puedes
-   modificar `scraper.py` para adaptarlo a tus necesidades.
+3. The `scraper.py` script will run automatically when the `scraper` container
+   starts and will print the title of the target page. Modify `scraper.py` to
+   suit your needs.
 
-## Notas
+## Notes
 
-- El puerto 4444 expuesto por el contenedor `browser` es el WebDriver remoto
-  donde se conecta Selenium.  El puerto 7900 expone la interfaz web noVNC que
-  te permite ver e interactuar con el navegador.
-- Este ejemplo utiliza `seleniarm/standalone-chromium:latest`, pero puedes
-  reemplazarlo por `selenium/standalone-firefox` o `selenium/standalone-edge`
-  según tus necesidades.
+- Port 4444 exposed by the `browser` container is the remote WebDriver where
+  Selenium connects. Port 7900 exposes the noVNC web interface so you can see
+  and interact with the browser.
+- This example uses `seleniarm/standalone-chromium:latest`, but you can replace
+  it with `selenium/standalone-firefox` or `selenium/standalone-edge` depending
+  on your needs.
